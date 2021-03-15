@@ -8,15 +8,32 @@ use Illuminate\Http\Request;
 class Log_Reg_Controller extends Controller
 {
     //
-    public function log_index()
+    public function login_index()
     {
 
         return view('auth.login');
     }
 
-    public function lgin_check()
+    public function login_check(Request $req)
     {
-        return view('auth.login');
+        $user_x = User::where('email', $req->email)
+            ->where('password', $req->password)
+            ->get();
+
+        if(count($user_x) > 0)
+        {
+            if($user_x[0]->user_type == 'admin')
+            {
+                $req->session()->put('name', $user_x[0]->name);
+                $req->session()->put('id', $user_x[0]->id);
+                return redirect()->route('admin.index');
+            }
+            else
+            {
+                return redirect()->route('home');
+            }
+        }
+        return back();
     }
 
     public function reg_index()
