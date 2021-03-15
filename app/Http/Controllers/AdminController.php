@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,40 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function edit_profile()
+    {
+        $id = session()->get('id');
+        $user_x = User::find($id);
+        return view('admin.edit_profile')->with('user', $user_x);
+    }
+
+    public function update_profile(UpdateProfileRequest $req)
+    {
+        $id = session()->get('id');
+
+        $user_x = User::find($id);
+        $user_x->name = $req->name;
+        $user_x->email = $req->email;
+        $user_x->password = $req->password;
+        $user_x->address = $req->address;
+        if($req->hasFile('image_file'))
+        {
+            $file_name = date('y-m-d').time().'.'.$req->file('image_file')
+                    ->getClientOriginalExtension();
+            $user_x->image = $file_name;
+            $req->file('image_file')->move('uploads/images', $file_name);
+        }
+
+        if($user_x->save())
+        {
+            session()->flash('msg', 'Updated successfully');
+        }
+        else {
+            session()->flash('msg', 'Update failed!');
+        }
+        return redirect()->back();
     }
 
     /**
