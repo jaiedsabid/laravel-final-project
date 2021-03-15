@@ -25,6 +25,9 @@ Route::post('/login','Log_Reg_Controller@login_check');
 /* Admin Routes */
 
 Route::get('/dashboard', 'AdminController@index')->name('admin.index');
+Route::get('/admin/profile', 'AdminController@show_profile')->name('admin.profile');
+Route::get('/admin/profile/edit', 'AdminController@edit_profile')->name('admin.edit_profile');
+Route::post('/admin/profile/edit', 'AdminController@update_profile');
 
 
 /* User Routes */
