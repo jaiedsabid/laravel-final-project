@@ -44,16 +44,16 @@
         <div class="page-title">
             <h1>Register</h1>
         </div>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             @csrf
             <div class="input-group">
                 <label for="name">Name: </label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" value="{{old('name')}}">
             </div>
 
             <div class="input-group">
                 <label for="email">Email: </label>
-                <input type="text" name="email" id="email">
+                <input type="text" name="email" id="email" value="{{old('email')}}">
             </div>
 
             <div class="input-group">
@@ -63,17 +63,17 @@
 
             <div class="input-group">
                 <label for="con_password">Confirm Password: </label>
-                <input type="con_password" name="password" id="password">
+                <input type="password" name="con_password" id="password">
             </div>
 
             <div class="input-group">
                 <label for="address">Address: </label>
-                <input type="text" name="address" id="address">
+                <input type="text" name="address" id="address" value="{{old('address')}}">
             </div>
 
             <div class="input-group">
                 <label for="image_file">Profile Image: </label>
-                <input type="file" name="image_file" id="image_file">
+                <input type="file" name="image_file" id="image_file" value="{{old('image_file')}}">
             </div>
 
             <div class="button-group">
@@ -81,5 +81,11 @@
                 <input type="reset" name="reset" value="Reset">
             </div>
         </form>
+    </div>
+
+    <div style="color: red">
+        @foreach($errors->all() as $err)
+		{{$err}} <br>
+	@endforeach
     </div>
 @endsection
