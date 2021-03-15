@@ -19,7 +19,7 @@ class Log_Reg_Controller extends Controller
 
     public function reg_index()
     {
-        return view('auth.login');
+        return view('auth.register');
     }
 
     public function reg_check()

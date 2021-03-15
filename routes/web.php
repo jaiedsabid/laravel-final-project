@@ -15,15 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/login','Log_Reg_Controller@index');
-Route::post('/login','Log_Reg_Controller@index');
-Route::get('/registration','Log_Reg_Controller@index');
-Route::post('/registration','Log_Reg_Controller@index');
-
+})->name('home');
 
 
 /* Admin Routes */
 
 Route::get('/dashboard', 'AdminController@index')->name('admin.index');
+
+/* User Routes */
+
+Route::get('/login','Log_Reg_Controller@log_index')->name('login');
+Route::post('/login','Log_Reg_Controller@lgin_check');
+Route::get('/registration','Log_Reg_Controller@reg_index')->name('register');
+Route::post('/registration','Log_Reg_Controller@reg_check');
