@@ -14,7 +14,7 @@ class Log_Reg_Controller extends Controller
         return view('auth.login');
     }
 
-    public function login_check(Request $req)
+    public function login_check(LoginRequest $req)
     {
         $user_x = User::where('email', $req->email)
             ->where('password', $req->password)
@@ -22,15 +22,16 @@ class Log_Reg_Controller extends Controller
 
         if(count($user_x) > 0)
         {
+            $req->session()->put('name', $user_x[0]->name);
+            $req->session()->put('id', $user_x[0]->id);
+
             if($user_x[0]->user_type == 'admin')
             {
-                $req->session()->put('name', $user_x[0]->name);
-                $req->session()->put('id', $user_x[0]->id);
                 return redirect()->route('admin.index');
             }
             else
             {
-                return redirect()->route('home');
+                return redirect()->route('user.home');
             }
         }
         return back();
