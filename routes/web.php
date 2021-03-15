@@ -21,3 +21,9 @@ Route::get('/login','Log_Reg_Controller@index');
 Route::post('/login','Log_Reg_Controller@index');
 Route::get('/registration','Log_Reg_Controller@index');
 Route::post('/registration','Log_Reg_Controller@index');
+
+
+
+/* Admin Routes */
+
+Route::get('/dashboard', 'AdminController@index')->name('admin.index');
