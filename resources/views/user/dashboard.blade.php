@@ -10,6 +10,7 @@
 
     @endif
     <br><br>
-    Profile Picture : <img src="{{asset('uploads/allUsers/'.$data['image'])}}" alt="" height="100px" width="100px"><br><br>
+    Profile Picture : <img src="{{asset('uploads/images/'.$data['image'])}}" alt="" height="100px" width="100px"><br><br>
+    <a href="{{route('user.updateImage')}}" style="color: red"><b>Change Picture</b></a>
 
 @endsection
