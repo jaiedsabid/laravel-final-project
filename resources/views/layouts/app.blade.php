@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    @yield('css')
 </head>
 <body>
+    @yield('nav-bar')
     @yield('content')
+    <footer>Copyright© 2021-<?php echo date("Y");?></footer>
 </body>
 </html>
