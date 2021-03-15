@@ -31,3 +31,5 @@ Route::get('/dashboard', 'AdminController@index')->name('admin.index');
 
 Route::get('/register','Log_Reg_Controller@reg_index')->name('register');
 Route::post('/register','Log_Reg_Controller@reg_check');
+
+Route::get('/user/dashboard','UserController@index')->name('user.home');

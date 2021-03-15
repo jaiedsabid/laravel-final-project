@@ -24,15 +24,16 @@ class Log_Reg_Controller extends Controller
 
         if(count($user_x) > 0)
         {
-            $req->session()->put('name', $user_x[0]->name);
             $req->session()->put('id', $user_x[0]->id);
 
             if($user_x[0]->user_type == 'admin')
             {
+                $req->session()->put('user_type', 'admin');
                 return redirect()->route('admin.index');
             }
             else
             {
+                $req->session()->put('user_type', 'user');
                 return redirect()->route('user.home');
             }
         }

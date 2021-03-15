@@ -73,7 +73,7 @@
 
             <div class="input-group">
                 <label for="image_file">Profile Image: </label>
-                <input type="file" name="image_file" id="image_file" value="{{old('image_file')}}">
+                <input type="file" name="image_file" id="image_file" >
             </div>
 
             <div class="button-group">
