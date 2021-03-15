@@ -17,3 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login','Log_Reg_Controller@index');
+Route::post('/login','Log_Reg_Controller@index');
+Route::get('/registration','Log_Reg_Controller@index');
+Route::post('/registration','Log_Reg_Controller@index');
