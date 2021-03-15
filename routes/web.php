@@ -26,5 +26,5 @@ Route::get('/dashboard', 'AdminController@index')->name('admin.index');
 
 Route::get('/login','Log_Reg_Controller@log_index')->name('login');
 Route::post('/login','Log_Reg_Controller@lgin_check');
-Route::get('/registration','Log_Reg_Controller@reg_index')->name('register');
-Route::post('/registration','Log_Reg_Controller@reg_check');
+Route::get('/register','Log_Reg_Controller@reg_index')->name('register');
+Route::post('/register','Log_Reg_Controller@reg_check');

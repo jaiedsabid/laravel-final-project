@@ -9,7 +9,11 @@
 </head>
 <body>
     @yield('nav-bar')
+
     @yield('content')
+
+    <center>
     <footer>Copyright© 2021-<?php echo date("Y");?></footer>
+    </center>
 </body>
 </html>
