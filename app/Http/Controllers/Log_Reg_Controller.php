@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class Log_Reg_Controller extends Controller
@@ -9,6 +10,7 @@ class Log_Reg_Controller extends Controller
     //
     public function log_index()
     {
+
         return view('auth.login');
     }
 
