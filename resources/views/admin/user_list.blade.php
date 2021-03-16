@@ -1,12 +1,13 @@
 @extends('layouts.admin.common')
 
 @section('title')
-    @if(Route::currentRouteName() != 'admin.admin_list')
-        User List
-    @else
+    @if(Route::currentRouteName() == 'admin.admin_list')
         Admin List
+    @else
+        User List
     @endif
 @endsection
+
 
 @section('css')
     <style>
@@ -28,15 +29,41 @@
         .message {
             margin: 32px 0px;
         }
+        .search-bar div {
+            display: inline-block;
+        }
+        .next-prev {
+            margin-left: 25%;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container">
         <div class="page-title">
-            <h1>User List</h1>
+            <h1>
+                @if(Route::currentRouteName() == 'admin.admin_list')
+                    Admin List
+                @else
+                    User List
+                @endif
+            </h1>
+        </div>
+        <div class="search-user">
+            <div class="search-bar">
+                <form action="" method="post">
+                    @csrf
+                    <div class="group-input">
+                        <input type="text" name="search" placeholder="example@example.com">
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" name="submit" value="Search">
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="user-list">
+            @if(count($users) > 0)
             <table>
                 <thead>
                     <tr>
@@ -83,6 +110,12 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="next-prev">
+                {{ $users }}
+            </div>
+            @else
+            <h3>No Users found</h3>
+            @endif
         </div>
         <div class="message">
             {{ session('msg') }}

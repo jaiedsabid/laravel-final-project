@@ -1,43 +1,48 @@
 @extends('layouts.admin.common')
 
 @section('title')
-    Edit Profile
+    Edit Details
 @endsection
 
 @section('css')
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
         .container {
-            width: 620px;
-            margin: 50px 0px;
-            padding: 0px 10px;
+            padding: 32px 0;
         }
-        .page-title {
-            margin: 20px 0px;
+        #back a {
+            text-decoration: none;
+            font-weight: bold;
         }
         .input-group {
-            margin-top: 10px;
+            margin: 12px 0px;
         }
-        .input-group input {
+        .input-group input, select {
             position: absolute;
             left: 150px;
         }
-        .button-group {
-            margin-top: 20px;
+        .message {
+            margin: 15px 0px;
         }
-
+        .errors {
+            margin: 15px 0px;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container">
-        <div class="page-title">
-            <h1>Edit Profile Info</h1>
+        <div id="back">
+            @if(Route::currentRouteName() == 'admin.edit_admin')
+                <a href="{{ route('admin.admin_list') }}">Back</a>
+            @else
+                <a href="{{ route('admin.user_list') }}">Back</a>
+            @endif
         </div>
-        <div class="edit-info">
-            <form action="" method="post" enctype="multipart/form-data">
+        <div class="page-title">
+            <h1>Edit Details</h1>
+        </div>
+        <div class="edit-details">
+            <form action="" method="post">
                 @csrf
                 <div class="input-group">
                     <label for="name">Name: </label>
@@ -65,8 +70,11 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="image_file">Profile Image: </label>
-                    <input type="file" name="image_file" id="image_file" value="{{old('image_file')}}">
+                    <label for="address">User Type: </label>
+                    <select name="user_type" id="user_type">
+                        <option value="user" @if($user->user_type == 'user') selected @endif>User</option>
+                        <option value="admin" @if($user->user_type == 'admin') selected @endif>Admin</option>
+                    </select>
                 </div>
 
                 <div class="button-group">
@@ -75,13 +83,13 @@
                 </div>
             </form>
         </div>
-        <div class="message">
-            {{ session('msg') }}
-        </div>
         <div class="errors">
             @foreach($errors->all() as $error)
                 {{ $error }} <br>
             @endforeach
+        </div>
+        <div class="message">
+            {{ session('msg') }}
         </div>
     </div>
 @endsection

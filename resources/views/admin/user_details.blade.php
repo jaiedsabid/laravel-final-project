@@ -1,7 +1,7 @@
 @extends('layouts.admin.common')
 
 @section('title')
-    Profile
+    User Details
 @endsection
 
 @section('css')
@@ -43,7 +43,7 @@
 @section('content')
     <div class="container">
         <div class="page-title">
-            <h1>Profile</h1>
+            <h1>User Details</h1>
         </div>
         <div class="profile-info">
             <div class="profile-img">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -61,13 +62,35 @@ class AdminController extends Controller
 
     public function user_list()
     {
-        $users = User::where('user_type', '!=', 'admin')->get();
+        $users = User::where('user_type', '!=', 'admin')->simplePaginate(5);
         return view('admin.user_list')->with('users', $users);
     }
+
     public function admin_list()
     {
-        $users = User::where('user_type', 'admin')->get();
+        $users = User::where('user_type', 'admin')->simplePaginate(5);
         return view('admin.user_list')->with('users', $users);
+    }
+
+    public function search(Request $req)
+    {
+        if($req->route()->getName() == 'admin.admin_list')
+        {
+            $users = User::where('email', 'LIKE', $req->search.'%')
+                ->where('user_type', 'admin')
+                ->simplePaginate(5);
+
+            return view('admin.user_list')->with('users', $users);
+        }
+
+        else if($req->route()->getName() == 'admin.user_list')
+        {
+            $users = User::where('email', 'LIKE', $req->search.'%')
+                ->where('user_type', 'user')
+                ->simplePaginate(5);
+
+            return view('admin.user_list')->with('users', $users);
+        }
     }
 
     /**
@@ -78,7 +101,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user_x = User::find($id);
+        return view('admin.edit_details')->with('user', $user_x);
     }
 
     public function edit_profile()
@@ -123,9 +147,40 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $req, $id)
     {
-        //
+        $success_msg = 'Details updated successfully.';
+        $failed_msg = 'User details update failed!';
+
+        $user_x = User::find($id);
+        $user_type = $user_x->user_type;
+
+        $user_x->name = $req->name;
+        $user_x->email = $req->email;
+        $user_x->password = $req->password;
+        $user_x->address = $req->address;
+        $user_x->user_type = $req->user_type;
+
+        if($user_type == 'admin')
+        {
+            if($user_x->save())
+            {
+                $req->session()->flash('msg', $success_msg);
+            } else {
+                $req->session()->flash('msg', $failed_msg);
+            }
+            return redirect()->back();
+        }
+        else if($user_type == 'user')
+        {
+            if($user_x->save())
+            {
+                $req->session()->flash('msg', $success_msg);
+            } else {
+                $req->session()->flash('msg', $failed_msg);
+            }
+            return redirect()->back();
+        }
     }
 
     /**
