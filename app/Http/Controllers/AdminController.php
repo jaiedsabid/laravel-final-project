@@ -134,8 +134,31 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $req)
     {
-        //
+        $user_x = User::find($id);
+        $success_msg = 'User removed successfully.';
+        $failed_msg = 'User failed to remove.';
+
+        if($user_x->user_type == 'admin')
+        {
+            if(User::destroy($id))
+            {
+                $req->session()->flash('msg', $success_msg);
+            } else {
+                $req->session()->flash('msg', $failed_msg);
+            }
+            return redirect()->route('admin.admin_list');
+        }
+        else if($user_x->user_type == 'user')
+        {
+            if(User::destroy($id))
+            {
+                $req->session()->flash('msg', $success_msg);
+            } else {
+                $req->session()->flash('msg', $failed_msg);
+            }
+            return redirect()->route('admin.user_list');
+        }
     }
 }

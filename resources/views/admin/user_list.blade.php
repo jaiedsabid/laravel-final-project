@@ -1,7 +1,11 @@
 @extends('layouts.admin.common')
 
 @section('title')
-    User List
+    @if(Route::currentRouteName() != 'admin.admin_list')
+        User List
+    @else
+        Admin List
+    @endif
 @endsection
 
 @section('css')
@@ -20,6 +24,9 @@
             color: #010a60;
             text-align: center;
             font-weight: 600;
+        }
+        .message {
+            margin: 32px 0px;
         }
     </style>
 @endsection
@@ -47,6 +54,7 @@
                 </thead>
                 <tbody>
                     @foreach($users as $user)
+                        @if($user->id != session('id'))
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -71,9 +79,13 @@
                                 </td>
                             @endif
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="message">
+            {{ session('msg') }}
         </div>
     </div>
 @endsection

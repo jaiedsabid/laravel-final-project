@@ -21,6 +21,7 @@ class UsersSeedr extends Seeder
             'password' => '1234',
             'address' => Str::random(16),
             'user_type' => 'admin',
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('users')->insert([
@@ -29,7 +30,7 @@ class UsersSeedr extends Seeder
             'password' => '1234',
             'address' => Str::random(16),
             'user_type' => 'user',
-            'created_at' => date("Y-m-d H:i:s"),
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }
