@@ -57,6 +57,19 @@ class AdminController extends Controller
         $user_x = User::find($id);
         return view('admin.profile')->with('user', $user_x);
     }
+
+    public function user_list()
+    {
+        $users = User::where('user_type', '!=', 'admin')->get();
+        return view('admin.user_list')->with('users', $users);
+    }
+    public function admin_list()
+    {
+        $users = User::where('user_type', '!=', 'admin');
+        echo $users;
+        //return view('admin.users_list');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

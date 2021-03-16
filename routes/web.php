@@ -29,6 +29,14 @@ Route::get('/admin/profile', 'AdminController@show_profile')->name('admin.profil
 Route::get('/admin/profile/edit', 'AdminController@edit_profile')->name('admin.edit_profile');
 Route::post('/admin/profile/edit', 'AdminController@update_profile');
 
+Route::get('/admin/users/user/list', 'AdminController@user_list')->name('admin.user_list');
+Route::get('/admin/users/user/{id}/view', 'AdminController@view_user')->name('admin.view_user');
+Route::get('/admin/users/user/{id}/edit', 'AdminController@edit_user')->name('admin.edit_user');
+Route::post('/admin/users/user/{id}/edit', 'AdminController@update_user');
+Route::get('/admin/users/user/{id}/delete', 'AdminController@delete_user')->name('admin.delete_user');
+
+Route::get('/admin/users/admin/list', 'AdminController@admin_list')->name('admin.admin_list');
+
 
 /* User Routes */
 
