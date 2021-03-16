@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.userlay')
+
+@section('title')
+    User Update
+@endsection
 
 @section('css')
     <style>
@@ -32,28 +36,19 @@
     </style>
 @endsection
 
-@section('title')
-    User Registration
-@endsection
-
 @section('content')
     <div id="container" class="container">
         <div id="back">
-            <a href="{{ route('login') }}">Back</a>
+            <a href="{{ route('user.home') }}">Back</a>
         </div>
         <div class="page-title">
-            <h1>Register</h1>
+            <h1>User Update</h1>
         </div>
         <form action="" method="post" enctype="multipart/form-data">
             @csrf
             <div class="input-group">
                 <label for="name">Name: </label>
                 <input type="text" name="name" id="name" value="{{old('name')}}">
-            </div>
-
-            <div class="input-group">
-                <label for="email">Email: </label>
-                <input type="text" name="email" id="email" value="{{old('email')}}">
             </div>
 
             <div class="input-group">
@@ -71,13 +66,8 @@
                 <input type="text" name="address" id="address" value="{{old('address')}}">
             </div>
 
-            <div class="input-group">
-                <label for="image_file">Profile Image: </label>
-                <input type="file" name="image_file" id="image_file" >
-            </div>
-
             <div class="button-group">
-                <input type="submit" name="submit" value="Register">
+                <input type="submit" name="submit" value="Update Profile">
                 <input type="reset" name="reset" value="Reset">
             </div>
         </form>
@@ -89,3 +79,6 @@
 	@endforeach
     </div>
 @endsection
+
+
+

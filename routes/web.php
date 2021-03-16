@@ -20,7 +20,7 @@ Route::get('/', function () {
 /* Common */
 Route::get('/login','Log_Reg_Controller@login_index')->name('login');
 Route::post('/login','Log_Reg_Controller@login_check');
-
+Route::get('/logout','LogOutController@index')->name('logout');
 
 /* Admin Routes */
 
@@ -34,3 +34,17 @@ Route::post('/admin/profile/edit', 'AdminController@update_profile');
 
 Route::get('/register','Log_Reg_Controller@reg_index')->name('register');
 Route::post('/register','Log_Reg_Controller@reg_check');
+
+
+Route::get('/user/dashboard','UserController@index')->name('user.home');
+
+
+Route::get('/user/update','UserController@update')->name('user.update');
+Route::post('/user/update','UserController@store');
+
+
+Route::get('/user/changeimage','UserController@updateImage')->name('user.updateImage');
+Route::post('/user/changeimage','UserController@storeImage');
+
+
+Route::get('/user/update-subscription','UserController@update_subs')->name('user.update_subs');
