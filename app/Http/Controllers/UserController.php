@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewCamp;
+use App\Http\Requests\NewProjRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\UserImageUpdateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Project;
+use App\Models\Subscription;
 use App\Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -14,35 +20,14 @@ class UserController extends Controller
     public function index(Request $req)
     {
         $data = User::where('id',$req->session()->get('id'))->first();
-        return view('user.dashboard')->with('data',$data);
+        $subs = Subscription::find($data['subscription_id']);
+        //dd($subs->subscription_find);
+        //dd($subs['name']);
+        return view('user.dashboard')->with('data',$data)->with('subs',$subs);
     }
 
-    public function update(Request $req)
+    public function update()
     {
-
-
-        // $user->name = $req->name;
-        // $user->email = $req->email;
-        // $user->password = $req->password;
-        // $user->address = $req->address;
-        // $user->user_type = 'user';
-
-        // if($req->hasFile('image_file'))
-        // {
-        //     $image = $req->file('image_file');
-        //     $extension = $image->getClientOriginalExtension();
-        //     $image_name = time() . '.' . $extension;
-        //     $image->move('uploads/allUsers',$image_name);
-        //     $user->image = $image_name;
-        // }
-        // else{
-        //     $user->image = null;
-        // }
-
-
-        //$user->save();
-
-
         return view('user.update');
     }
 
@@ -72,9 +57,11 @@ class UserController extends Controller
 
         if($req->hasFile('image_file'))
         {
+
+            File::delete('uploads/images/'.$user->image);
             $image = $req->file('image_file');
             $extension = $image->getClientOriginalExtension();
-            $image_name = time() . '.' . $extension;
+            $image_name = date('y-m-d').time() . '.' . $extension;
             $image->move('uploads/images',$image_name);
             $user->image = $image_name;
         }
@@ -86,5 +73,7 @@ class UserController extends Controller
 
         return redirect()->route('user.home');
     }
+
+
 
 }

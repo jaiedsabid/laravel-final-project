@@ -45,3 +45,9 @@ Route::post('/user/changeimage','UserController@storeImage');
 
 
 Route::get('/user/update-subscription','UserController@update_subs')->name('user.update_subs');
+
+
+
+
+Route::get('/user/new-camp','ProjectController@newProj')->name('user.newProj');
+Route::post('/user/new-camp','ProjectController@storeNewProj');

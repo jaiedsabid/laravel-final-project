@@ -7,7 +7,7 @@
     Subscription : @if ($data['subscription_id'] == null)
       <span style="color: red"> Not Subscriberd Yet</span>
     @else
-
+        {{$subs['name']}}
     @endif
     <br><br>
     Profile Picture : <img src="{{asset('uploads/images/'.$data['image'])}}" alt="" height="100px" width="100px"><br><br>
