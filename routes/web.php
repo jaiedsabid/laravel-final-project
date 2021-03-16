@@ -30,12 +30,16 @@ Route::get('/admin/profile/edit', 'AdminController@edit_profile')->name('admin.e
 Route::post('/admin/profile/edit', 'AdminController@update_profile');
 
 Route::get('/admin/users/user/list', 'AdminController@user_list')->name('admin.user_list');
-Route::get('/admin/users/user/{id}/view', 'AdminController@view_user')->name('admin.view_user');
-Route::get('/admin/users/user/{id}/edit', 'AdminController@edit_user')->name('admin.edit_user');
-Route::post('/admin/users/user/{id}/edit', 'AdminController@update_user');
-Route::get('/admin/users/user/{id}/delete', 'AdminController@delete_user')->name('admin.delete_user');
+Route::get('/admin/users/user/{id}/view', 'AdminController@show')->name('admin.view_user');
+Route::get('/admin/users/user/{id}/edit', 'AdminController@edit')->name('admin.edit_user');
+Route::post('/admin/users/user/{id}/edit', 'AdminController@update');
+Route::get('/admin/users/user/{id}/delete', 'AdminController@destroy')->name('admin.delete_user');
 
 Route::get('/admin/users/admin/list', 'AdminController@admin_list')->name('admin.admin_list');
+Route::get('/admin/users/admin/{id}/view', 'AdminController@show')->name('admin.view_admin');
+Route::get('/admin/users/admin/{id}/edit', 'AdminController@edit')->name('admin.edit_admin');
+Route::post('/admin/users/admin/{id}/edit', 'AdminController@update');
+Route::get('/admin/users/admin/{id}/delete', 'AdminController@destroy')->name('admin.delete_admin');
 
 
 /* User Routes */

@@ -48,7 +48,8 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_x = User::find($id);
+        return view('admin.user_details')->with('user', $user_x);
     }
 
     public function show_profile()
@@ -65,9 +66,8 @@ class AdminController extends Controller
     }
     public function admin_list()
     {
-        $users = User::where('user_type', '!=', 'admin');
-        echo $users;
-        //return view('admin.users_list');
+        $users = User::where('user_type', 'admin')->get();
+        return view('admin.user_list')->with('users', $users);
     }
 
     /**
