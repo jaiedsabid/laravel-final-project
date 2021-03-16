@@ -48,7 +48,7 @@
         <div class="profile-info">
             <div class="profile-img">
                 @if(isset($user->image))
-                    <img src="{{ asset('asset/image/'.$user->image) }}" alt="Profile Image">
+                    <img src="{{ asset('uploads/images/'.$user->image) }}" alt="Profile Image">
                 @else
                     <div class="no-image">
                         Profile image not set

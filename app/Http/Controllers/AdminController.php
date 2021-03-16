@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
@@ -85,6 +86,7 @@ class AdminController extends Controller
         $user_x->address = $req->address;
         if($req->hasFile('image_file'))
         {
+            File::delete('uploads/images/'.$user_x->image);
             $file_name = date('y-m-d').time().'.'.$req->file('image_file')
                     ->getClientOriginalExtension();
             $user_x->image = $file_name;
