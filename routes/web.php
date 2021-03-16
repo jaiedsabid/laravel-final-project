@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', 'ProjectController@index')->name('home');
 
 /* Common */
 Route::get('/login','Log_Reg_Controller@login_index')->name('login');
@@ -49,5 +47,8 @@ Route::get('/user/update-subscription','UserController@update_subs')->name('user
 
 
 
-Route::get('/user/new-camp','ProjectController@newProj')->name('user.newProj');
+Route::get('/user/new-camp','ProjectController@newProj')->name('proj.newProj');
 Route::post('/user/new-camp','ProjectController@storeNewProj');
+
+
+Route::get('/user/view-proj','ProjectController@viewProj')->name('proj.viewProj');
