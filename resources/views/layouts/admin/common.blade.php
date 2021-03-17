@@ -12,6 +12,12 @@
                 <li><a href="{{ route('admin.create_users') }}">Create Account</a></li>
             </ul>
         </li>
+        <li>
+            Subscription
+            <ul>
+                <li><a href="{{ route('admin.subs_list') }}">Subscription Packages</a></li>
+            </ul>
+        </li>
         <li><a href="{{ route('logout') }}">Logout</a></li>
     </ul>
 @endsection

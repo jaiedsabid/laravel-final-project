@@ -44,6 +44,11 @@ Route::get('/admin/users/admin/{id}/edit', 'AdminController@edit')->name('admin.
 Route::post('/admin/users/admin/{id}/edit', 'AdminController@update');
 Route::get('/admin/users/admin/{id}/delete', 'AdminController@destroy')->name('admin.delete_admin');
 
+Route::get('/admin/subscription/list', 'AdminController@subs_list')->name('admin.subs_list');
+Route::get('/admin/subscription/list/{id}/view', 'AdminController@subs_view')->name('admin.subs_view');
+Route::get('/admin/subscription/list/{id}/edit', 'AdminController@subs_edit')->name('admin.subs_edit');
+Route::get('/admin/subscription/list/{id}/delete', 'AdminController@subs_delete')->name('admin.subs_delete');
+
 
 /* User Routes */
 

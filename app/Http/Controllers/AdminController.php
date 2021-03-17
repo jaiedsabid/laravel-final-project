@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -231,5 +232,35 @@ class AdminController extends Controller
             }
             return redirect()->route('admin.user_list');
         }
+    }
+
+    public function subs_list()
+    {
+        $subs = Subscription::simplePaginate(5);
+        return view('admin.subs_list')->with('subs', $subs);
+    }
+
+    public function subs_view($id)
+    {
+        $sub = Subscription::where('id', $id)->get();
+        return view('admin.subs_view')->with('sub', $sub[0]);
+    }
+
+    public function subs_edit(Request $req, $id)
+    {
+
+    }
+
+    public function subs_delete($id)
+    {
+        if(Subscription::destroy($id))
+        {
+            session()->flash('msg', 'Package removed successfully.');
+        }
+        else
+        {
+            session()->flash('msg', 'Failed to remove the package!');
+        }
+        return redirect()->route('admin.subs_list');
     }
 }
