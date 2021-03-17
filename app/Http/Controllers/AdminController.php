@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
@@ -27,7 +28,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create_users');
     }
 
     /**
@@ -36,9 +37,24 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUsersRequest $req)
     {
-        //
+        $userX = new User;
+        $userX->name = $req->name;
+        $userX->email = $req->email;
+        $userX->password = $req->password;
+        $userX->address = $req->address;
+        $userX->user_type = $req->user_type;
+
+        if($userX->save())
+        {
+            session()->flash('msg', 'User account created successfully.');
+        }
+        else {
+            session()->flash('msg', 'User account creation failed!!.');
+        }
+
+        return redirect()->back();
     }
 
     /**

@@ -27,6 +27,9 @@ Route::get('/admin/profile', 'AdminController@show_profile')->name('admin.profil
 Route::get('/admin/profile/edit', 'AdminController@edit_profile')->name('admin.edit_profile');
 Route::post('/admin/profile/edit', 'AdminController@update_profile');
 
+Route::get('/admin/create/users', 'AdminController@create')->name('admin.create_users');
+Route::post('/admin/create/users', 'AdminController@store');
+
 Route::get('/admin/users/user/list', 'AdminController@user_list')->name('admin.user_list');
 Route::post('/admin/users/user/list', 'AdminController@search')->name('admin.user_list');
 Route::get('/admin/users/user/{id}/view', 'AdminController@show')->name('admin.view_user');

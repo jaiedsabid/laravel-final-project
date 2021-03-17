@@ -9,6 +9,7 @@
             <ul>
                 <li><a href="{{ route('admin.user_list') }}">User List</a></li>
                 <li><a href="{{ route('admin.admin_list') }}">Admin List</a></li>
+                <li><a href="{{ route('admin.create_users') }}">Create Account</a></li>
             </ul>
         </li>
         <li><a href="{{ route('logout') }}">Logout</a></li>
