@@ -61,7 +61,7 @@ class Log_Reg_Controller extends Controller
         {
             $image = $req->file('image_file');
             $extension = $image->getClientOriginalExtension();
-            $image_name = time() . '.' . $extension;
+            $image_name = date('y-m-d').time() . '.' . $extension;
             $image->move('uploads/images',$image_name);
             $user->image = $image_name;
         }

@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', 'ProjectController@index')->name('home');
 
 /* Common */
 Route::get('/login','Log_Reg_Controller@login_index')->name('login');
@@ -62,3 +60,20 @@ Route::post('/user/changeimage','UserController@storeImage');
 
 
 Route::get('/user/update-subscription','UserController@update_subs')->name('user.update_subs');
+
+
+
+
+Route::get('/user/new-proj','ProjectController@newProj')->name('proj.newProj');
+Route::post('/user/new-proj','ProjectController@storeNewProj');
+
+
+Route::get('/user/view-proj','ProjectController@viewProj')->name('proj.viewProj');
+
+Route::get('/user/update-proj','ProjectController@updateProj')->name('proj.updateProj');
+
+Route::get('/user/update-projform/{id}','ProjectController@updateProjForm')->name('proj.updateProjForm');
+Route::post('/user/update-projform/{id}','ProjectController@storeProjForm');
+
+Route::get('/user/delete-proj/{id}','ProjectController@deleteProjView')->name('proj.deleteProjForm');
+Route::post('/user/delete-proj/{id}','ProjectController@deleteProj');

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     use HasFactory;
+
+    public function subscription_find()
+    {
+        return $this->hasOne(User::class,'subscription_id');
+    }
 }
