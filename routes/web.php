@@ -23,6 +23,21 @@ Route::get('/logout','LogOutController@index')->name('logout');
 /* Admin Routes */
 
 Route::get('/dashboard', 'AdminController@index')->name('admin.index');
+Route::get('/admin/profile', 'AdminController@show_profile')->name('admin.profile');
+Route::get('/admin/profile/edit', 'AdminController@edit_profile')->name('admin.edit_profile');
+Route::post('/admin/profile/edit', 'AdminController@update_profile');
+
+Route::get('/admin/users/user/list', 'AdminController@user_list')->name('admin.user_list');
+Route::get('/admin/users/user/{id}/view', 'AdminController@show')->name('admin.view_user');
+Route::get('/admin/users/user/{id}/edit', 'AdminController@edit')->name('admin.edit_user');
+Route::post('/admin/users/user/{id}/edit', 'AdminController@update');
+Route::get('/admin/users/user/{id}/delete', 'AdminController@destroy')->name('admin.delete_user');
+
+Route::get('/admin/users/admin/list', 'AdminController@admin_list')->name('admin.admin_list');
+Route::get('/admin/users/admin/{id}/view', 'AdminController@show')->name('admin.view_admin');
+Route::get('/admin/users/admin/{id}/edit', 'AdminController@edit')->name('admin.edit_admin');
+Route::post('/admin/users/admin/{id}/edit', 'AdminController@update');
+Route::get('/admin/users/admin/{id}/delete', 'AdminController@destroy')->name('admin.delete_admin');
 
 
 /* User Routes */
@@ -47,8 +62,16 @@ Route::get('/user/update-subscription','UserController@update_subs')->name('user
 
 
 
-Route::get('/user/new-camp','ProjectController@newProj')->name('proj.newProj');
-Route::post('/user/new-camp','ProjectController@storeNewProj');
+Route::get('/user/new-proj','ProjectController@newProj')->name('proj.newProj');
+Route::post('/user/new-proj','ProjectController@storeNewProj');
 
 
 Route::get('/user/view-proj','ProjectController@viewProj')->name('proj.viewProj');
+
+Route::get('/user/update-proj','ProjectController@updateProj')->name('proj.updateProj');
+
+Route::get('/user/update-projform/{id}','ProjectController@updateProjForm')->name('proj.updateProjForm');
+Route::post('/user/update-projform/{id}','ProjectController@storeProjForm');
+
+Route::get('/user/delete-proj/{id}','ProjectController@deleteProjView')->name('proj.deleteProjForm');
+Route::post('/user/delete-proj/{id}','ProjectController@deleteProj');

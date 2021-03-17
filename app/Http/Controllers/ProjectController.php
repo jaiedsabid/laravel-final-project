@@ -6,6 +6,8 @@ use App\Http\Requests\NewProjRequest;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\File;
 
 class ProjectController extends Controller
 {
@@ -18,7 +20,7 @@ class ProjectController extends Controller
     public function newProj()
     {
 
-        return view('proj.new_proj');
+        return view('user.new_proj');
     }
     public function storeNewProj(NewProjRequest $req)
     {
@@ -56,4 +58,75 @@ class ProjectController extends Controller
 
         return view('user.viewProj')->with('user',$user);
     }
+
+
+    public function updateProj(Request $req)
+    {
+        $user = User::where('id',$req->session()->get('id'))->firstOrFail();
+        //dd($user->hasproj);
+
+        return view('user.update_Proj')->with('user',$user);
+    }
+
+    public function updateProjForm($parm)
+    {
+        $id = Crypt::decrypt($parm);
+        //dd(Crypt::decrypt($parm));
+
+        $proj = Project::find($id);
+
+        return view('user.update_projForm')->with('proj',$proj);
+    }
+
+    public function storeProjForm(NewProjRequest $req,$parm)
+    {
+        $id = Crypt::decrypt($parm);
+        //dd(Crypt::decrypt($parm));
+
+        $proj = Project::find($id);
+
+        $proj->title = $req->title;
+        $proj->description = $req->description;
+        $proj->req_money = $req->req_money;
+        $proj->user_id = $req->session()->get('id');
+        //image file
+
+
+        if($req->hasFile('image'))
+        {
+            File::delete('uploads/project_images/'.$proj->image);
+            $image = $req->file('image');
+            $extension = $image->getClientOriginalExtension();
+            $image_name = date('y-m-d').time() . '.' . $extension;
+            $image->move('uploads/project_images',$image_name);
+            $proj->image = $image_name;
+        }
+
+        $proj->save();
+        return redirect()->route('proj.updateProj');
+
+
+    }
+
+    public function deleteProjView($parm)
+    {
+        $id = Crypt::decrypt($parm);
+        //dd(Crypt::decrypt($parm));
+
+        $proj = Project::find($id);
+
+        return view('user.delete_proj')->with('proj',$proj);
+    }
+
+    public function deleteProj($parm)
+    {
+        $id = Crypt::decrypt($parm);
+
+        if(Project::destroy($id)){
+            return redirect()->route('proj.viewProj');
+        }else{
+            return redirect()->route('proj.viewProj');
+        }
+    }
+
 }
