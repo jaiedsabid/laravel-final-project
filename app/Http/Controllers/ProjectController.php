@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NewProjRequest;
 use App\Models\Project;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -14,13 +15,18 @@ class ProjectController extends Controller
     //
     public function index()
     {
+        // $subs = User::find(7);
+        // dd(gettype($subs->hassub->project_limit));
+
+
         $projs = Project::all();
         return view('welcome')->with('projs',$projs);
     }
     public function newProj()
     {
 
-        return view('user.new_proj');
+        $user = User::where('id',session()->get('id'))->first();
+        return view('user.new_proj')->with('user',$user);
     }
     public function storeNewProj(NewProjRequest $req)
     {

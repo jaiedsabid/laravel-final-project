@@ -13,4 +13,9 @@ class User extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function hassub()
+    {
+        return $this->hasOne(Subscription::class,'id','subscription_id');
+    }
 }

@@ -20,10 +20,10 @@ class UserController extends Controller
     public function index(Request $req)
     {
         $data = User::where('id',$req->session()->get('id'))->first();
-        $subs = Subscription::find($data['subscription_id']);
+        //$subs = Subscription::find($data['subscription_id']);
         //dd($subs->subscription_find);
         //dd($subs['name']);
-        return view('user.dashboard')->with('data',$data)->with('subs',$subs);
+        return view('user.dashboard')->with('data',$data);
     }
 
     public function update()
