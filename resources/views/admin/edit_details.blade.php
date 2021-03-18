@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="button-group">
-                    <input type="submit" name="submit" value="Edit">
+                    <input type="submit" name="submit" value="Apply">
                     <input type="reset" name="reset" value="Reset">
                 </div>
             </form>

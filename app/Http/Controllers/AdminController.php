@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUsersRequest;
+use App\Http\Requests\SubsRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Subscription;
@@ -242,13 +243,33 @@ class AdminController extends Controller
 
     public function subs_view($id)
     {
-        $sub = Subscription::where('id', $id)->get();
-        return view('admin.subs_view')->with('sub', $sub[0]);
+        $sub = Subscription::find($id);
+        return view('admin.subs_view')->with('sub', $sub);
     }
 
-    public function subs_edit(Request $req, $id)
+    public function subs_edit($id)
     {
+        $sub = Subscription::find($id);
+        return view('admin.subs_edit')->with('sub', $sub);
+    }
+    public function subs_update(SubsRequest $req, $id)
+    {
+        $sub = Subscription::find($id);
+        $sub->name = $req->name;
+        $sub->info = $req->info;
+        $sub->duration = $req->duration;
+        $sub->price = $req->price;
+        $sub->project_limit = $req->project_limit;
 
+        if($sub->save())
+        {
+            session()->flash('msg', 'Subscription package details updated successfully.');
+        }
+        else
+        {
+            session()->flash('msg', 'Failed to update subscription package details!');
+        }
+        return redirect()->back();
     }
 
     public function subs_delete($id)
@@ -262,5 +283,30 @@ class AdminController extends Controller
             session()->flash('msg', 'Failed to remove the package!');
         }
         return redirect()->route('admin.subs_list');
+    }
+
+    public function subs_create()
+    {
+        return view('admin.subs_create');
+    }
+
+    public function subs_store(SubsRequest $req)
+    {
+        $sub = new Subscription;
+        $sub->name = $req->name;
+        $sub->info = $req->info;
+        $sub->duration = $req->duration;
+        $sub->price = $req->price;
+        $sub->project_limit = $req->project_limit;
+
+        if($sub->save())
+        {
+            session()->flash('msg', 'New subscription package created successfully.');
+        }
+        else
+        {
+            session()->flash('msg', 'Failed to create new subscription package!');
+        }
+        return redirect()->back();
     }
 }

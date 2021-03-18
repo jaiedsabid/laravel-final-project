@@ -16,6 +16,7 @@
             Subscription
             <ul>
                 <li><a href="{{ route('admin.subs_list') }}">Subscription Packages</a></li>
+                <li><a href="{{ route('admin.subs_create') }}">Create New Package</a></li>
             </ul>
         </li>
         <li><a href="{{ route('logout') }}">Logout</a></li>
