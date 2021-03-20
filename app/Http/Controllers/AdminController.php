@@ -6,6 +6,7 @@ use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\SubsRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\Project;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -308,5 +309,44 @@ class AdminController extends Controller
             session()->flash('msg', 'Failed to create new subscription package!');
         }
         return redirect()->back();
+    }
+
+    public function project_list()
+    {
+        $projs = Project::simplePaginate(5);
+        return view('admin.project_list')->with('projs', $projs);
+    }
+
+    public function project_details($id)
+    {
+        $proj = Project::find($id);
+        return view('admin.project_details')->with('proj', $proj);
+    }
+
+    public function project_approve($id)
+    {
+        $proj = Project::find($id);
+        $proj->status = 'active';
+        if($proj->save())
+        {
+            session()->flash('msg', 'Project Approved.');
+        }
+        else
+        {
+            session()->flash('msg', 'Failed to approve the project!');
+        }
+        return redirect()->route('admin.project_details', $proj->id);
+    }
+
+    public function project_delete($id)
+    {
+        if(Project::destroy($id))
+        {
+            session()->flash('msg', 'The project removed successfully.');
+        }
+        else {
+            session()->flash('msg', 'Failed to remove the project!');
+        }
+        return redirect()->route('admin.project_list');
     }
 }

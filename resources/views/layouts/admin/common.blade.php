@@ -13,10 +13,16 @@
             </ul>
         </li>
         <li>
-            Subscription
+            Subscription Package
             <ul>
                 <li><a href="{{ route('admin.subs_list') }}">Subscription Packages</a></li>
                 <li><a href="{{ route('admin.subs_create') }}">Create New Package</a></li>
+            </ul>
+        </li>
+        <li>
+            Project
+            <ul>
+                <li><a href="{{ route('admin.project_list') }}">Project List</a></li>
             </ul>
         </li>
         <li><a href="{{ route('logout') }}">Logout</a></li>

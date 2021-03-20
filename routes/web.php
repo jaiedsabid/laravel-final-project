@@ -52,6 +52,10 @@ Route::get('/admin/subscription/list/{id}/delete', 'AdminController@subs_delete'
 Route::get('/admin/subscription/create/package', 'AdminController@subs_create')->name('admin.subs_create');
 Route::post('/admin/subscription/create/package', 'AdminController@subs_store');
 
+Route::get('/admin/project/list', 'AdminController@project_list')->name('admin.project_list');
+Route::get('/admin/project/{id}/details', 'AdminController@project_details')->name('admin.project_details');
+Route::get('/admin/project/{id}/approve', 'AdminController@project_approve')->name('admin.project_approve');
+Route::get('/admin/project/{id}/delete', 'AdminController@project_delete')->name('admin.project_delete');
 
 /* User Routes */
 
