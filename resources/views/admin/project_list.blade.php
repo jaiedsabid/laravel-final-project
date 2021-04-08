@@ -10,6 +10,7 @@
         .page-title,
         .list,
         .message {
+            position: relative;
             margin: 15px 0;
         }
         th, tr, td {
@@ -22,13 +23,17 @@
             text-decoration: none;
             font-weight: bold;
         }
+        .paginate {
+            margin: 2rem 20%;
+
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container">
         <div class="page-title">
-            <h1>All Projects</h1>
+            <h1>{{ $title }}</h1>
         </div>
         <div class="list">
             @if(count($projs) <= 0)
@@ -40,6 +45,7 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Posted By</th>
+                        <th>User Email</th>
                         <th>Money Required</th>
                         <th>Status</th>
                         <th>Posted At</th>
@@ -51,7 +57,8 @@
                 <tr>
                     <td>{{ $proj->id }}</td>
                     <td>{{ $proj->title }}</td>
-                    <td>{{ $proj->user_id }}</td>
+                    <td>{{ $proj->user->name }}</td>
+                    <td>{{ $proj->user->email }}</td>
                     <td>{{ $proj->req_money }}</td>
                     <td>{{ $proj->status }}</td>
                     <td>{{ $proj->created_at }}</td>
@@ -66,7 +73,9 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $projs->links() }}
+            <div class="paginate">
+                {{ $projs->links() }}
+            </div>
             @endif
         </div>
         <div class="message">

@@ -314,13 +314,16 @@ class AdminController extends Controller
     public function project_list()
     {
         $projs = Project::simplePaginate(5);
-        return view('admin.project_list')->with('projs', $projs);
+        return view('admin.project_list')
+            ->with('projs', $projs)
+            ->with('title', 'All Projects');
     }
 
     public function project_details($id)
     {
         $proj = Project::find($id);
-        return view('admin.project_details')->with('proj', $proj);
+        return view('admin.project_details')
+            ->with('proj', $proj);
     }
 
     public function project_approve($id)
@@ -348,5 +351,44 @@ class AdminController extends Controller
             session()->flash('msg', 'Failed to remove the project!');
         }
         return redirect()->route('admin.project_list');
+    }
+
+    public function project()
+    {
+        $total = Project::all()->count();
+        $active = Project::where('status', 'active')->get()->count();
+        $pending = Project::where('status', 'pending')->get()->count();
+        $closed = Project::where('status', 'closed')->get()->count();
+        $status_all = [
+            'total'=>$total,
+            'active'=>$active,
+            'pending'=>$pending,
+            'closed'=>$closed
+        ];
+        return view('admin.project')->with('status', $status_all);
+    }
+
+    public function pending_projects()
+    {
+        $projects = Project::where('status', 'pending')->simplePaginate(5);
+        return view('admin.project_list')
+            ->with('title', 'Pending Projects')
+            ->with('projs', $projects);
+    }
+
+    public function active_projects()
+    {
+        $projects = Project::where('status', 'active')->simplePaginate(5);
+        return view('admin.project_list')
+            ->with('title', 'Active Projects')
+            ->with('projs', $projects);
+    }
+
+    public function closed_projects()
+    {
+        $projects = Project::where('status', 'closed')->simplePaginate(5);
+        return view('admin.project_list')
+            ->with('title', 'Closed Projects')
+            ->with('projs', $projects);
     }
 }

@@ -20,7 +20,7 @@
             </ul>
         </li>
         <li>
-            Project
+            <a href="{{ route('admin.project') }}">Project</a>
             <ul>
                 <li><a href="{{ route('admin.project_list') }}">Project List</a></li>
             </ul>
