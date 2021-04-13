@@ -13,4 +13,9 @@ class Subscription extends Model
     {
         return $this->hasOne(User::class,'subscription_id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'subscription_id');
+    }
 }

@@ -5,7 +5,7 @@
         <li><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li><a href="{{ route('admin.profile') }}">Profile</a></li>
         <li>
-            Users
+            <a href="{{ route('admin.users') }}">Users</a>
             <ul>
                 <li><a href="{{ route('admin.user_list') }}">User List</a></li>
                 <li><a href="{{ route('admin.admin_list') }}">Admin List</a></li>
@@ -13,7 +13,7 @@
             </ul>
         </li>
         <li>
-            Subscription Package
+            <a href="{{ route('admin.subscription') }}">Subscription</a>
             <ul>
                 <li><a href="{{ route('admin.subs_list') }}">Subscription Packages</a></li>
                 <li><a href="{{ route('admin.subs_create') }}">Create New Package</a></li>

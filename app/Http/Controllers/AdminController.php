@@ -391,4 +391,26 @@ class AdminController extends Controller
             ->with('title', 'Closed Projects')
             ->with('projs', $projects);
     }
+
+    public function subscription()
+    {
+        $total_packages = Subscription::all()->count();
+        $total_active_users = User::where('subscription_id', '!=', null)
+            ->get()->count();
+        $total_inactive_users = User::where('subscription_id', null)
+            ->get()->count();
+        return view('admin.subscription')
+            ->with('total_packages', $total_packages)
+            ->with('total_active_users', $total_active_users)
+            ->with('total_inactive_users', $total_active_users);
+    }
+
+    public function users()
+    {
+        $total_users = User::where('user_type', 'user')->get()->count();
+        $total_admins = User::where('user_type', 'admin')->get()->count();
+        return view('admin.users')
+            ->with('total_users', $total_users)
+            ->with('total_admins', $total_admins);
+    }
 }
