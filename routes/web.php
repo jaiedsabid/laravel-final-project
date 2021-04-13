@@ -78,3 +78,6 @@ Route::post('/user/delete-proj/{id}','ProjectController@deleteProj');
 
 Route::post('/{project}', 'LikeController@store')->name('like.store');
 Route::delete('/{project}', 'LikeController@destroy')->name('like.destroy');
+
+Route::get('/user/stripe-payment/{id}', 'StripeController@handleGet')->name('stripe-payment');
+Route::post('/user/stripe-payment/{id}', 'StripeController@handlePost')->name('stripe.payment');

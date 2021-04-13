@@ -10,6 +10,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\Project;
 use App\Models\Subscription;
 use App\Models\User;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -23,6 +24,11 @@ class UserController extends Controller
         //$subs = Subscription::find($data['subscription_id']);
         //dd($subs->subscription_find);
         //dd($subs['name']);
+        $mytime = Carbon::now();
+        if($mytime>$data->expire_date){
+            $data->subscription_id = null;
+
+        }
         return view('user.dashboard')->with('data',$data);
     }
 
@@ -72,6 +78,14 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('user.home');
+    }
+
+    public function update_subs()
+    {
+        $subs = Subscription::all();
+        $data = User::where('id',session()->get('id'))->first();
+
+        return view('user.upgrde_subs')->with('subs',$subs)->with('data',$data);
     }
 
 
