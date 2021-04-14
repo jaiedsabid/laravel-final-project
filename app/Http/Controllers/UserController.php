@@ -25,10 +25,11 @@ class UserController extends Controller
         //dd($subs->subscription_find);
         //dd($subs['name']);
         $mytime = Carbon::now();
-        if($mytime>$data->expire_date){
+        if($mytime>$data->expire_date ||$data->expire_date==null){
             $data->subscription_id = null;
-
+            $data->save();
         }
+
         return view('user.dashboard')->with('data',$data);
     }
 

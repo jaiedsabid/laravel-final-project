@@ -20,4 +20,16 @@ class Project extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function findUser()
+    {
+        return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function findCash()
+    {
+        return $this->hasMany(Transaction::class,'project_id','id');
+    }
+
+
 }

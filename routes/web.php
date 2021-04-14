@@ -81,3 +81,8 @@ Route::delete('/{project}', 'LikeController@destroy')->name('like.destroy');
 
 Route::get('/user/stripe-payment/{id}', 'StripeController@handleGet')->name('stripe-payment');
 Route::post('/user/stripe-payment/{id}', 'StripeController@handlePost')->name('stripe.payment');
+
+Route::get('project/{id}', 'ProjectController@viewIndProj')->name('proj.viewIndProj');
+
+Route::get('/project/stripe-payment/{id}', 'StripeController@projStripePay')->name('projStripe.payment');
+Route::post('/project/stripe-payment/{id}', 'StripeController@projStripePayVeri')->name('projStripe.payment');

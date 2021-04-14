@@ -38,10 +38,16 @@
                     <button type="submit">Unlike</button>
                 </form>
             @endif
-
-
         @endif
         <span>{{$proj->likes->count()}} {{Str::plural('like', $proj->likes->count())}} </span>
+
+        <br>
+        <br>
+        @php
+            $id= Crypt::encrypt($proj['id']);
+        @endphp
+        <a href="{{route('proj.viewIndProj',[$id])}}"><button>View</button></a>
+        <hr>
 
     @endforeach
 

@@ -135,4 +135,13 @@ class ProjectController extends Controller
         }
     }
 
+
+    public function viewIndProj($id)
+    {
+        $id = Crypt::decrypt($id);
+        $proj = Project::find($id);
+        //dd($proj);
+        return view('viewIndProj')->with('proj',$proj);
+    }
+
 }
