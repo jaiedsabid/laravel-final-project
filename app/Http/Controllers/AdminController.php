@@ -398,11 +398,12 @@ class AdminController extends Controller
         $total_active_users = User::where('subscription_id', '!=', null)
             ->get()->count();
         $total_inactive_users = User::where('subscription_id', null)
+            ->where('user_type', '!=', 'admin')
             ->get()->count();
         return view('admin.subscription')
             ->with('total_packages', $total_packages)
             ->with('total_active_users', $total_active_users)
-            ->with('total_inactive_users', $total_active_users);
+            ->with('total_inactive_users', $total_inactive_users);
     }
 
     public function users()
