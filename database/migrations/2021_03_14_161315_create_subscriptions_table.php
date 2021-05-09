@@ -17,7 +17,7 @@ class CreateSubscriptionsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('price');
-            $table->string('duration');
+            $table->integer('duration');
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('subscription_id')->nullable()
                 ->constrained()
                 ->onDelete('set null');
+            $table->string('user_type');
             $table->timestamps();
         });
     }
